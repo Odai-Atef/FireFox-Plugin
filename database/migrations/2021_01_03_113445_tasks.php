@@ -21,7 +21,7 @@ class Tasks extends Migration
             $table->string('status');
             $table->string('account_handler');
             $table->timestamps();
-            $table->dateTime('executed_at');
+            $table->dateTime('executed_at')->nullable();
         });
     }
 

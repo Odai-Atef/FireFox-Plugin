@@ -1,7 +1,7 @@
 // Put all the javascript code here, that you want to execute after page load.
 console.log("Odai plugin has been loaded ");
 var openedAt = new Date();
-
+var API="http://35.159.18.195/api";
 // setTimeout(function () {
 //     createColumn();
 // }, 10000)
@@ -31,10 +31,11 @@ setInterval(function () {
     if (handler != null) {
         try {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "http://localhost:8000/api/tasks/index", true);
+            console.log(API+"/tasks/index");
+            xhttp.open("POST", API+"/tasks/index", true);
             xhttp.setRequestHeader("Content-Type", "application/json");
             xhttp.onreadystatechange = function () {
-                console.log(this);
+                console.log(this.responseText);
                 if (this.readyState == 4 && this.status == 200) {
                     var response = this.responseText;
                     console.log(response);
