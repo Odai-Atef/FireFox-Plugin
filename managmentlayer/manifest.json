@@ -15,7 +15,8 @@
 		{
 			"matches": [
 				"https://tweetdeck.twitter.com/*",
-				"https://twitter.com/*"
+				"https://twitter.com/*",
+                "https://www.tagaqar.com/*"
 			],
 			"js": [
 				"content_script.js"
@@ -24,7 +25,8 @@
 	],
 	"permissions": [
 		"activeTab",
-		"contextMenus"
+		"contextMenus",
+        "storage"
 	],
 	"browser_action": {
 		"default_icon": {
