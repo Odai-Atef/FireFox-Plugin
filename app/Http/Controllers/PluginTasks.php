@@ -39,6 +39,7 @@ class PluginTasks extends Controller
         $validated = $request->validate([
             'type' => 'required|max:45',
             'data' => 'required|max:45',
+            'rule_name' => 'required|max:45',
             'account_handler' => 'required|max:45',
         ]);
         $data = $request->input();

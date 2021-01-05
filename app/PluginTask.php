@@ -8,5 +8,5 @@ class PluginTask extends Model
 {
     //
     protected $table="firefox_plugin_tasks";
-    protected $fillable=["type","data","account_handler",'status'];
+    protected $fillable=["type","data","account_handler",'status',"rule_name"];
 }

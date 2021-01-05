@@ -20,6 +20,7 @@ class Tasks extends Migration
             $table->string('data');
             $table->string('status');
             $table->string('account_handler');
+            $table->string('rule_name');
             $table->timestamps();
             $table->dateTime('executed_at')->nullable();
         });
