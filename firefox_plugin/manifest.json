@@ -15,8 +15,7 @@
 		{
 			"matches": [
 				"https://tweetdeck.twitter.com/*",
-				"https://twitter.com/*",
-                "https://www.tagaqar.com/*"
+				"https://twitter.com/*"
 			],
 			"js": [
 				"content_script.js"

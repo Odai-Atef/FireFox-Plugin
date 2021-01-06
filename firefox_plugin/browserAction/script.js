@@ -2,13 +2,20 @@ var API = "http://35.159.18.195/api";
 var handler = null;
 browser.storage.onChanged.addListener(newEvent);
 
+checkHandler();
+checkTasks();
 
+setInterval(() => {
+    checkHandler();
+    checkTasks();
+}, 10000);
+
+//functions
 function newEvent(data) {
     checkHandler();
     updateDone(data);
     // document.getElementById("newEvent").innerHTML = "New Event";
 }
-
 function updateDone(data) {
     if (data['done_tasks'] != undefined) {
         try {
@@ -38,7 +45,6 @@ function updateDone(data) {
         }
     }
 }
-
 function checkHandler() {
     browser.storage.local.get().then((d) => {
         if (d['handler'] != undefined) {
@@ -47,7 +53,6 @@ function checkHandler() {
         }
     });
 }
-
 function checkTasks() {
     if (handler != null) {
         try {
@@ -76,17 +81,4 @@ function checkTasks() {
     }
 }
 
-checkHandler();
-checkTasks();
 
-setInterval(() => {
-    checkHandler();
-    checkTasks();
-}, 10000);
-
-// function followAccount() {
-//     console.log("Clicked");
-//     // var ele=document.getElementsByClassName("css-1dbjc4n");
-//     // ele[118].click();
-//     // console.log(ele[118]);
-// }

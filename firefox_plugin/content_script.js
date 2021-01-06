@@ -1,8 +1,16 @@
-// Put all the javascript code here, that you want to execute after page load.
-console.log("Odai plugin has been loaded ");
-var API = "http://35.159.18.195/api";
 var handler = null;
+browser.storage.onChanged.addListener(newStorage);
+//Always check for handlers
+setTimeout(() => {
+    getHandler();
+    followAccount();
+}, 3000)
+setInterval(function () {
+    getHandler();
+}, 60000);
 
+
+//functions
 function getHandler() {
     try {
         var new_handler = document.getElementsByClassName("js-account-summary")[0].getElementsByTagName('a')[0].getAttribute("data-user-name");
@@ -17,20 +25,18 @@ function getHandler() {
     }
 }
 
-browser.storage.onChanged.addListener(new_storage);
-
-function new_storage(data) {
-    console.log(data);
+function newStorage(data) {
     if (data['tasks'] != undefined) {
         if (data['tasks'].newValue.type == 'follow') {
             window.open("https://www.twitter.com/" + data['tasks'].newValue.data);
-
+        } else if (data['tasks'].newValue.type == 'rule') {
+            createColumn(data['tasks'].newValue.data);
         }
     }
 }
 
-function createColumn() {
-    document.getElementsByClassName("js-app-search-input app-search-input search-input")[0].value = "السعودية  OR ksa";
+function createColumn(data) {
+    document.getElementsByClassName("js-app-search-input app-search-input search-input")[0].value = data;
     document.getElementsByClassName("js-perform-search txt-size--14 search-input-perform-search")[0].click()
 }
 
@@ -39,11 +45,11 @@ function followAccount() {
     if (ele[0] !== undefined) {
         ele[0].click();
         browser.storage.local.get().then((cached_data) => {
-            var current_user = window.location.href.replace("https://www.twitter.com/","").replace("https://twitter.com/","") ;
+            var current_user = window.location.href.replace("https://www.twitter.com/", "").replace("https://twitter.com/", "");
             if (current_user == cached_data['tasks'].data) {
                 var done_tasks = cached_data['tasks'];
                 cached_data['done_tasks'] = done_tasks;
-                browser.storage.local.set(cached_data).then((d)=>{
+                browser.storage.local.set(cached_data).then((d) => {
                     setTimeout(() => {
                         window.close();
                     }, 1000);
@@ -54,11 +60,4 @@ function followAccount() {
     }
 }
 
-//Always check for handlers
-setTimeout(() => {
-    getHandler();
-    followAccount();
-}, 3000)
-setInterval(function () {
-    getHandler();
-}, 60000);
+console.log("DMMIL has been loaded");
